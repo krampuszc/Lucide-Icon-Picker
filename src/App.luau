@@ -14,7 +14,7 @@ local e = React.createElement
 local ALL_ICONS = {}
 local ALL_NAMES = {}
 for name, pos in pairs(Assets.icons) do
-	table.insert(ALL_ICONS, { name = name, x = pos[1], y = pos[2] })
+	table.insert(ALL_ICONS, { name = name, spriteId = Assets.sprites[pos[1]], x = pos[2], y = pos[3] })
 	table.insert(ALL_NAMES, name)
 end
 table.sort(ALL_ICONS, function(a, b) return a.name < b.name end)
@@ -29,7 +29,7 @@ local function search(query: string)
 	for _, name in ipairs(ranked) do
 		local pos = Assets.icons[name]
 		if pos then
-			table.insert(result, { name = name, x = pos[1], y = pos[2] })
+			table.insert(result, { name = name, spriteId = Assets.sprites[pos[1]], x = pos[2], y = pos[3] })
 		end
 	end
 	return result
@@ -90,7 +90,6 @@ local function App()
 		Grid = e(IconGrid, {
 			LayoutOrder = 2,
 			icons = icons,
-			spriteId = Assets.spriteId,
 			iconSize = Assets.iconSize,
 			selected = selected,
 			onSelect = setSelected,

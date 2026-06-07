@@ -8,8 +8,7 @@ local e = React.createElement
 local CELL_SIZE = 36
 
 local function IconGrid(props: {
-	icons: { { name: string, x: number, y: number } },
-	spriteId: string,
+	icons: { { name: string, spriteId: string, x: number, y: number } },
 	iconSize: number,
 	selected: string?,
 	onSelect: (string) -> (),
@@ -36,7 +35,7 @@ local function IconGrid(props: {
 			cells[icon.name] = e(IconCell, {
 				key = icon.name,
 				name = icon.name,
-				spriteId = props.spriteId,
+				spriteId = icon.spriteId,
 				iconSize = props.iconSize,
 				cellSize = CELL_SIZE,
 				iconX = icon.x,
