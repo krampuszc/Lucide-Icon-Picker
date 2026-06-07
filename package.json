@@ -1,0 +1,12 @@
+{
+    "name": "better-icon-picker",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "generate": "node scripts/generate-sprites.mjs"
+    },
+    "dependencies": {
+        "lucide-static": "^1.17.0",
+        "sharp": "^0.33.5"
+    }
+}

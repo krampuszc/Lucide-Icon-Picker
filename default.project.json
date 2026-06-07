@@ -1,0 +1,12 @@
+{
+    "name": "BetterIconPicker",
+    "tree": {
+        "$className": "Script",
+        "$path": "src/Plugin.server.luau",
+        "App": { "$path": "src/App.luau" },
+        "Components": { "$path": "src/Components" },
+        "Hooks": { "$path": "src/Hooks" },
+        "Modules": { "$path": "src/Modules" },
+        "Packages": { "$path": "Packages" }
+    }
+}
