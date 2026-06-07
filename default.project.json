@@ -3,6 +3,7 @@
     "tree": {
         "$path": "src/Plugin.server.luau",
         "App": { "$path": "src/App.luau" },
+        "App.story": { "$path": "src/App.story.luau" },
         "Components": { "$path": "src/Components" },
         "Hooks": { "$path": "src/Hooks" },
         "Modules": { "$path": "src/Modules" },

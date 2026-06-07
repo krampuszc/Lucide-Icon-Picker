@@ -75,65 +75,111 @@ local function App()
 		return search(query)
 	end, { query })
 	local canApply = selected ~= nil
+	local hoveredName, setHoveredName = React.useState(nil :: string?)
+	local hoveredPos, setHoveredPos = React.useState(Vector2.zero)
+	local framePos, setFramePos = React.useState(Vector2.zero)
+	local frameSize, setFrameSize = React.useState(Vector2.new(280, 420))
+
+	local function onHover(name: string?, position: Vector2?)
+		setHoveredName(name)
+		setHoveredPos(position or Vector2.zero)
+	end
+
+	local TOOLTIP_W = 160
+	local localX = hoveredPos.X - framePos.X
+	local localY = hoveredPos.Y - framePos.Y
+	local tooltipX = if localX + 8 + TOOLTIP_W > frameSize.X then localX - TOOLTIP_W - 8 else localX + 8
 
 	return e("Frame", {
 		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = theme:GetColor(Enum.StudioStyleGuideColor.MainBackground),
+		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
+		ClipsDescendants = false,
+		[React.Change.AbsolutePosition] = function(rbx)
+			setFramePos(rbx.AbsolutePosition)
+		end,
+		[React.Change.AbsoluteSize] = function(rbx)
+			setFrameSize(rbx.AbsoluteSize)
+		end,
 	}, {
-		Layout = e("UIListLayout", {
-			FillDirection = Enum.FillDirection.Vertical,
-			SortOrder = Enum.SortOrder.LayoutOrder,
-		}),
-		Search = e(SearchBar, {
-			LayoutOrder = 1,
-			query = query,
-			onChange = setQuery,
-			count = #icons,
-		}),
-		Grid = e(IconGrid, {
-			LayoutOrder = 2,
-			icons = icons,
-			iconSize = Assets.iconSize,
-			selected = selected,
-			onSelect = setSelected,
-		}),
-		Footer = e("Frame", {
-			LayoutOrder = 3,
-			Size = UDim2.new(1, 0, 0, 40),
+		Content = e("Frame", {
+			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = theme:GetColor(Enum.StudioStyleGuideColor.MainBackground),
 			BorderSizePixel = 0,
 		}, {
-			Padding = e("UIPadding", {
-				PaddingLeft = UDim.new(0, 8),
-				PaddingRight = UDim.new(0, 8),
-				PaddingTop = UDim.new(0, 6),
-				PaddingBottom = UDim.new(0, 6),
+			Layout = e("UIListLayout", {
+				FillDirection = Enum.FillDirection.Vertical,
+				SortOrder = Enum.SortOrder.LayoutOrder,
 			}),
-			Button = e("TextButton", {
-				Size = UDim2.new(1, 0, 1, 0),
-				Text = if canApply
-					then 'Apply "' .. (selected :: string) .. '"'
-					else "Select an icon above",
-				Font = Enum.Font.SourceSansSemibold,
-				TextSize = 14,
-				TextColor3 = theme:GetColor(
-					Enum.StudioStyleGuideColor.ButtonText,
-					if canApply then Enum.StudioStyleGuideModifier.Default else Enum.StudioStyleGuideModifier.Disabled
-				),
-				BackgroundColor3 = theme:GetColor(
-					Enum.StudioStyleGuideColor.Button,
-					if canApply then Enum.StudioStyleGuideModifier.Default else Enum.StudioStyleGuideModifier.Disabled
-				),
-				AutoButtonColor = canApply,
-				Active = canApply,
-				[React.Event.Activated] = function()
-					if selected then applyIcon(selected) end
-				end,
+			Search = e(SearchBar, {
+				LayoutOrder = 1,
+				query = query,
+				onChange = setQuery,
+				count = #icons,
+			}),
+			Grid = e(IconGrid, {
+				LayoutOrder = 2,
+				icons = icons,
+				iconSize = Assets.iconSize,
+				selected = selected,
+				onSelect = setSelected,
+				onHover = onHover,
+			}),
+			Footer = e("Frame", {
+				LayoutOrder = 3,
+				Size = UDim2.new(1, 0, 0, 40),
+				BackgroundColor3 = theme:GetColor(Enum.StudioStyleGuideColor.MainBackground),
+				BorderSizePixel = 0,
 			}, {
-				Corner = e("UICorner", { CornerRadius = UDim.new(0, 4) }),
+				Padding = e("UIPadding", {
+					PaddingLeft = UDim.new(0, 8),
+					PaddingRight = UDim.new(0, 8),
+					PaddingTop = UDim.new(0, 6),
+					PaddingBottom = UDim.new(0, 6),
+				}),
+				Button = e("TextButton", {
+					Size = UDim2.new(1, 0, 1, 0),
+					Text = if canApply
+						then 'Apply "' .. (selected :: string) .. '"'
+						else "Select an icon above",
+					Font = Enum.Font.SourceSansSemibold,
+					TextSize = 14,
+					TextColor3 = theme:GetColor(
+						Enum.StudioStyleGuideColor.ButtonText,
+						if canApply then Enum.StudioStyleGuideModifier.Default else Enum.StudioStyleGuideModifier.Disabled
+					),
+					BackgroundColor3 = theme:GetColor(
+						Enum.StudioStyleGuideColor.Button,
+						if canApply then Enum.StudioStyleGuideModifier.Default else Enum.StudioStyleGuideModifier.Disabled
+					),
+					AutoButtonColor = canApply,
+					Active = canApply,
+					[React.Event.Activated] = function()
+						if selected then applyIcon(selected) end
+					end,
+				}, {
+					Corner = e("UICorner", { CornerRadius = UDim.new(0, 4) }),
+				}),
 			}),
 		}),
+
+		Tooltip = if hoveredName then e("TextLabel", {
+			Size = UDim2.fromOffset(160, 24),
+			Position = UDim2.fromOffset(tooltipX, localY - 28),
+			BackgroundColor3 = theme:GetColor(Enum.StudioStyleGuideColor.Tooltip),
+			TextColor3 = theme:GetColor(Enum.StudioStyleGuideColor.MainText),
+			Text = hoveredName,
+			Font = Enum.Font.SourceSans,
+			TextSize = 14,
+			ZIndex = 10,
+			BorderSizePixel = 0,
+		}, {
+			Corner = e("UICorner", { CornerRadius = UDim.new(0, 5) }),
+			Padding = e("UIPadding", {
+				PaddingLeft = UDim.new(0, 6),
+				PaddingRight = UDim.new(0, 6),
+			}),
+		}) else nil,
 	})
 end
 

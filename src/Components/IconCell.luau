@@ -14,6 +14,7 @@ local function IconCell(props: {
 	isSelected: boolean,
 	onSelect: (string) -> (),
 	position: UDim2,
+	onHover: (name:string?, position:Vector2?) -> ()
 })
 	local theme = useTheme()
 	local hovered, setHovered = React.useState(false)
@@ -33,11 +34,13 @@ local function IconCell(props: {
 		[React.Event.Activated] = function()
 			props.onSelect(props.name)
 		end,
-		[React.Event.MouseEnter] = function()
+		[React.Event.MouseEnter] = function(rbx, x, y)
 			setHovered(true)
+			props.onHover(props.name, Vector2.new(x, y))
 		end,
 		[React.Event.MouseLeave] = function()
 			setHovered(false)
+			props.onHover(nil, nil)
 		end,
 	}, {
 		Corner = e("UICorner", { CornerRadius = UDim.new(0, 4) }),

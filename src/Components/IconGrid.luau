@@ -13,6 +13,7 @@ local function IconGrid(props: {
 	selected: string?,
 	onSelect: (string) -> (),
 	LayoutOrder: number?,
+	onHover: (name:string?, position:Vector2?) -> ()
 })
 	local theme = useTheme()
 	local scrollY, setScrollY = React.useState(0)
@@ -43,6 +44,7 @@ local function IconGrid(props: {
 				isSelected = props.selected == icon.name,
 				onSelect = props.onSelect,
 				position = UDim2.fromOffset(col * CELL_SIZE, row * CELL_SIZE),
+				onHover = props.onHover,
 			})
 		end
 	end
