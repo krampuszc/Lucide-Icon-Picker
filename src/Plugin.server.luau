@@ -1,4 +1,11 @@
 --!nocheck
+-- Lucide Icon Picker | krampuszc 2026
+-- Because the only other one is annoying to use.
+
+if not plugin then
+	return
+end
+
 local React = require(script.Packages.React)
 local ReactRoblox = require(script.Packages.ReactRoblox)
 local App = require(script.App)
@@ -17,9 +24,9 @@ widget.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local toolbar = plugin:CreateToolbar("Icon Picker")
 local button = toolbar:CreateButton(
-	"LucideIconPicker_toggle",
-	"Toggle Icon Picker",
-	"rbxassetid://7734199131"
+	"Icon Picker",
+	"Toggle Lucide Icon Picker",
+	"rbxassetid://138603030095322"
 )
 button.ClickableWhenViewportHidden = true
 

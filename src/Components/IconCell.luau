@@ -40,7 +40,6 @@ local function IconCell(props: {
 		end,
 		[React.Event.MouseLeave] = function()
 			setHovered(false)
-			props.onHover(nil, nil)
 		end,
 	}, {
 		Corner = e("UICorner", { CornerRadius = UDim.new(0, 4) }),

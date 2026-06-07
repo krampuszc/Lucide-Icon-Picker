@@ -64,6 +64,9 @@ local function IconGrid(props: {
 		[React.Change.AbsoluteSize] = function(rbx: ScrollingFrame)
 			setViewSize(rbx.AbsoluteSize)
 		end,
+		[React.Event.MouseLeave] = function()
+			props.onHover(nil, nil)
+		end,
 	}, cells)
 end
 

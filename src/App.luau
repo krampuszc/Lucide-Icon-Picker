@@ -79,10 +79,30 @@ local function App()
 	local hoveredPos, setHoveredPos = React.useState(Vector2.zero)
 	local framePos, setFramePos = React.useState(Vector2.zero)
 	local frameSize, setFrameSize = React.useState(Vector2.new(280, 420))
+	local hideTask = React.useRef(nil :: thread?)
+
+	React.useEffect(function()
+		return function()
+			if hideTask.current then
+				task.cancel(hideTask.current)
+			end
+		end
+	end, {})
 
 	local function onHover(name: string?, position: Vector2?)
-		setHoveredName(name)
-		setHoveredPos(position or Vector2.zero)
+		if hideTask.current then
+			task.cancel(hideTask.current)
+			hideTask.current = nil
+		end
+		if name then
+			setHoveredName(name)
+			setHoveredPos(position :: Vector2)
+		else
+			hideTask.current = task.delay(0.08, function()
+				setHoveredName(nil)
+				hideTask.current = nil
+			end)
+		end
 	end
 
 	local TOOLTIP_W = 160
@@ -164,17 +184,19 @@ local function App()
 		}),
 
 		Tooltip = if hoveredName then e("TextLabel", {
-			Size = UDim2.fromOffset(160, 24),
+			Size = UDim2.fromOffset(120, 24),
 			Position = UDim2.fromOffset(tooltipX, localY - 28),
 			BackgroundColor3 = theme:GetColor(Enum.StudioStyleGuideColor.Tooltip),
 			TextColor3 = theme:GetColor(Enum.StudioStyleGuideColor.MainText),
+			AutomaticSize = Enum.AutomaticSize.X,
 			Text = hoveredName,
 			Font = Enum.Font.SourceSans,
 			TextSize = 14,
 			ZIndex = 10,
-			BorderSizePixel = 0,
+			BorderSizePixel = 0.5,
+			BorderColor3 = theme:GetColor(Enum.StudioStyleGuideColor.Border),
 		}, {
-			Corner = e("UICorner", { CornerRadius = UDim.new(0, 5) }),
+			-- Corner = e("UICorner", { CornerRadius = UDim.new(0, 5) }),
 			Padding = e("UIPadding", {
 				PaddingLeft = UDim.new(0, 6),
 				PaddingRight = UDim.new(0, 6),
