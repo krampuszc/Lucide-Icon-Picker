@@ -4,7 +4,7 @@ local ReactRoblox = require(script.Packages.ReactRoblox)
 local App = require(script.App)
 
 local widget = plugin:CreateDockWidgetPluginGuiAsync(
-	"BetterIconPicker",
+	"LucideIconPicker",
 	DockWidgetPluginGuiInfo.new(
 		Enum.InitialDockState.Right,
 		false, false,
@@ -17,7 +17,7 @@ widget.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local toolbar = plugin:CreateToolbar("Icon Picker")
 local button = toolbar:CreateButton(
-	"BetterIconPicker_toggle",
+	"LucideIconPicker_toggle",
 	"Toggle Icon Picker",
 	"rbxassetid://7734199131"
 )

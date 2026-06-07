@@ -1,5 +1,5 @@
 {
-    "name": "BetterIconPicker",
+    "name": "LucideIconPicker",
     "tree": {
         "$path": "src/Plugin.server.luau",
         "App": { "$path": "src/App.luau" },
