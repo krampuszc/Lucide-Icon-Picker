@@ -1,1 +1,1 @@
-#  THE Better Icon Picker
+#  Lucide Icon Picker
