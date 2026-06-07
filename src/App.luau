@@ -41,19 +41,23 @@ local function applyIcon(name: string)
 	local selection = Selection:Get()
 	if #selection == 0 then return end
 
+	local spriteId = Assets.sprites[pos[1]]
+	local rectOffset = Vector2.new(pos[2], pos[3])
+	local rectSize = Vector2.new(Assets.iconSize, Assets.iconSize)
+
 	ChangeHistoryService:SetWaypoint("Apply icon " .. name)
 	for _, obj in selection do
 		if obj:IsA("ImageLabel") or obj:IsA("ImageButton") then
-			obj.Image = Assets.spriteId
-			obj.ImageRectOffset = Vector2.new(pos[1], pos[2])
-			obj.ImageRectSize = Vector2.new(Assets.iconSize, Assets.iconSize)
+			obj.Image = spriteId
+			obj.ImageRectOffset = rectOffset
+			obj.ImageRectSize = rectSize
 		else
 			local label = Instance.new("ImageLabel")
 			label.BackgroundTransparency = 1
 			label.Size = UDim2.fromOffset(50, 50)
-			label.Image = Assets.spriteId
-			label.ImageRectOffset = Vector2.new(pos[1], pos[2])
-			label.ImageRectSize = Vector2.new(Assets.iconSize, Assets.iconSize)
+			label.Image = spriteId
+			label.ImageRectOffset = rectOffset
+			label.ImageRectSize = rectSize
 			label.Parent = obj
 			local ratio = Instance.new("UIAspectRatioConstraint")
 			ratio.AspectRatio = 1
