@@ -2,6 +2,8 @@
 
 A Roblox Studio plugin for browsing and applying [Lucide](https://lucide.dev) icons to your UI.
 
+[![Get on Creator Store](https://img.shields.io/badge/Creator_Store-Get_Plugin-blue?logo=robloxstudio&logoColor=white)](https://create.roblox.com/store/asset/127945351334963)
+
 ![](extra/screenshot.png)
 
 ## Usage
@@ -10,6 +12,7 @@ A Roblox Studio plugin for browsing and applying [Lucide](https://lucide.dev) ic
 2. Search or browse the 1,706 icons
 3. Click an icon to select it
 4. Hit **Apply** to insert it into the selected `ImageLabel` or `ImageButton`
+
 
 ## Building from source
 
