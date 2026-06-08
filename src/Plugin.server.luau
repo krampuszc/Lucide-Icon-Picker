@@ -1,6 +1,6 @@
---!nocheck
+-- !nocheck
 -- Lucide Icon Picker | krampuszc 2026
--- Because the only other one is annoying to use.
+-- Because i was bored on a sunday night!
 
 if not plugin then
 	return

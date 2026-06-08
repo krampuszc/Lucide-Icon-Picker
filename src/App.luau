@@ -196,12 +196,12 @@ local function App()
 			BorderSizePixel = 0.5,
 			BorderColor3 = theme:GetColor(Enum.StudioStyleGuideColor.Border),
 		}, {
-			-- Corner = e("UICorner", { CornerRadius = UDim.new(0, 5) }),
-			Padding = e("UIPadding", {
-				PaddingLeft = UDim.new(0, 6),
-				PaddingRight = UDim.new(0, 6),
-			}),
-		}) else nil,
+				-- Corner = e("UICorner", { CornerRadius = UDim.new(0, 5) }),
+				Padding = e("UIPadding", {
+					PaddingLeft = UDim.new(0, 6),
+					PaddingRight = UDim.new(0, 6),
+				}),
+			}) else nil,
 	})
 end
 

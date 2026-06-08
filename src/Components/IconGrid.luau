@@ -14,7 +14,7 @@ local function IconGrid(props: {
 	onSelect: (string) -> (),
 	LayoutOrder: number?,
 	onHover: (name:string?, position:Vector2?) -> ()
-})
+	})
 	local theme = useTheme()
 	local scrollY, setScrollY = React.useState(0)
 	local viewSize, setViewSize = React.useState(Vector2.new(280, 380))

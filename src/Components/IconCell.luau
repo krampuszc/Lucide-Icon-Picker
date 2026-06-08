@@ -15,7 +15,7 @@ local function IconCell(props: {
 	onSelect: (string) -> (),
 	position: UDim2,
 	onHover: (name:string?, position:Vector2?) -> ()
-})
+	})
 	local theme = useTheme()
 	local hovered, setHovered = React.useState(false)
 
