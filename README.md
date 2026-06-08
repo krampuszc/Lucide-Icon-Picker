@@ -1,6 +1,6 @@
 # Lucide Icon Picker
 
-A Roblox Studio plugin for browsing and inserting [Lucide](https://lucide.dev) icons into your UI.
+A Roblox Studio plugin for browsing and applying [Lucide](https://lucide.dev) icons to your UI.
 
 ![](extra/screenshot.png)
 
@@ -28,4 +28,4 @@ rojo build --output LucideIconPicker.rbxm
 
 ## License
 
-Icons from [Lucide](https://lucide.dev) — ISC License. See [LICENSE](LICENSE).
+Icons from [Lucide](https://lucide.dev), licensed under ISC. See [LICENSE](LICENSE).
