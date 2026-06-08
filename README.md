@@ -2,7 +2,7 @@
 
 A Roblox Studio plugin for browsing and inserting [Lucide](https://lucide.dev) icons into your UI.
 
-<!-- screenshot here -->
+![](extra/screenshot.png)
 
 ## Usage
 
